@@ -1,0 +1,32 @@
+info:
+  component: Zuul Server
+  
+
+
+zuul:
+  routes:
+    login:
+      path: /login/**
+      serviceId: login-service 
+       
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+
+server:
+  port: 8080
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: DEBUG
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false      
