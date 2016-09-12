@@ -1,4 +1,4 @@
-package it.marcoberri.proxybal;
+package it.marcoberri.ms.proxybal;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -4,10 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>ms</artifactId>
-		<groupId>it.sincositalia.ms</groupId>
+		<groupId>it.marcoberri.ms</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>it.sincositalia.ms</groupId>
+	<groupId>it.marcoberri.ms</groupId>
 	<artifactId>proxy-balancer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
