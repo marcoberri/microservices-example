@@ -9,9 +9,7 @@
 	</parent>
 	
 	
-	<groupId>it.marcoberri.ms</groupId>
 	<artifactId>proxy-balancer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<dependencies>
 
@@ -35,7 +33,4 @@
 
 
 	</dependencies>
-	<build>
-		<finalName>proxy-balancer</finalName>
-	</build>
 </project>

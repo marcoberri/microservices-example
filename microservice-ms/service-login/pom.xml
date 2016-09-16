@@ -17,15 +17,6 @@
 
 	<dependencies>
 
-
-<!-- 		<dependency>
-			<groupId>it.marcoberri.ms</groupId>
-			<artifactId>service-common</artifactId>
-			<version>${project.version}</version>
-			<scope>compile</scope>
-		</dependency>
- -->
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -37,12 +28,6 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka-server</artifactId>
 		</dependency>
-		
-
-
-		<!-- <dependency> <groupId>org.springframework.data</groupId> <artifactId>spring-data-commons</artifactId> 
-			</dependency> <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-data-jpa</artifactId> 
-			</dependency> -->
 	</dependencies>
 
 
