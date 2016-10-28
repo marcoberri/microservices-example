@@ -1,27 +1,54 @@
+spring:
+  application:
+     name: service-proxy 
+      
 info:
   component: Zuul Server
-  
-
-
+             
 zuul:
   routes:
-    login:
-      path: /login/**
-      serviceId: login-service 
-       
-
+    user:
+      sensitiveHeaders:
+      path: /user/**
+      serviceId: service-user
+      stripPrefix: true
+    log:
+      sensitiveHeaders:
+      path: /log/**
+      serviceId: service-logger
+      stripPrefix: true
+    auth:
+      sensitiveHeaders:
+      path: /auth/**
+      serviceId: service-auth
+      stripPrefix: true
+  health:
+    enabled: true
+  add-proxy-headers: true
+  
+security:
+    basic:
+      enabled: false
+      enable-csrf: false
+      session: stateless 
+        
 eureka:
+  instance:
+    hostname: localhost
+    port: 1111
+    leaseRenewalIntervalInSeconds: 5   # DO NOT DO THIS IN PRODUCTION
   client:
     serviceUrl:
-      defaultZone: http://localhost:1111/eureka/
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
 
 server:
   port: 8080
 
 logging:
   level:
-    ROOT: INFO
-    org.springframework.web: DEBUG
+    ROOT: ERROR
+    org.springframework.web: ERROR
+  file: /log/${spring.application.name}.log
 
 endpoints:
   restart:

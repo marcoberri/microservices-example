@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: eureka
   profiles: default
   thymeleaf:
     enabled: false     # Disable Thymeleaf 
@@ -14,6 +16,13 @@ eureka:
   client:  # Not a client, don't register with yourself
     registerWithEureka: false
     fetchRegistry: false
+
+#logging:
+#  level:
+#    ROOT: DEBUG
+#    org.springframework.web: DEBUG
+#  file: /log/${spring.application.name}.log
+  
 
 ---
 

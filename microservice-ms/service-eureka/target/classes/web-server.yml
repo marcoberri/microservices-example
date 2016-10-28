@@ -1,7 +1,7 @@
 # Spring properties
 spring:
   application:
-    name: web-service  # Identify this application
+    name: service-registration  # Identify this application
   freemarker:
     enabled: false     # Ignore Eureka dashboard FreeMarker templates
   thymeleaf:

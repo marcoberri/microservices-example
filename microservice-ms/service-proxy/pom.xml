@@ -5,11 +5,11 @@
 	<parent>
 		<groupId>it.marcoberri.ms</groupId>
 		<version>0.0.1-SNAPSHOT</version>
-		<artifactId>main</artifactId>
+		<artifactId>parent</artifactId>
 	</parent>
-	
-	
-	<artifactId>proxy-balancer</artifactId>
+
+
+	<artifactId>service-proxy</artifactId>
 	<packaging>jar</packaging>
 	<dependencies>
 
@@ -17,10 +17,23 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-zuul</artifactId>
 		</dependency>
-		
+
 		<dependency>
+			<!-- Setup Spring MVC & REST, use Embedded Tomcat -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
 
 
@@ -32,5 +45,22 @@
 
 
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<!-- Spring Cloud starter -->
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+		</dependency>
+		
 	</dependencies>
 </project>

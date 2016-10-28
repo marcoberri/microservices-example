@@ -1,20 +1,50 @@
-
+#APP Security Token
+app:
+  token:
+    url: http://localhost:8080/auth/oauth/check_token
+    enable: true
+    tokenfield: token
+    PathPatterns: /**
+     
 # Spring properties
 spring:
   application:
-     name: login-service  # Service registers under this name
+     name: service-logger 
   freemarker:
-    enabled: false           # Ignore Eureka dashboard FreeMarker templates
-                             # Template location for this application only
-
-# Map the error path to error template (for Thymeleaf)
+    enabled: false           
+  datasource:
+    name: mainDB   
+    password: toor 
+    username: root
+    url:  jdbc:mysql://localhost/ms_log?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false # JDBC url of the database.
+    driver-class-name: com.mysql.jdbc.Driver
+    testWhileIdle : true
+    validationQuery: SELECT 1
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto : update
+      dialect: org.hibernate.dialect.MySQL5Dialect
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:  
+      hibernate.connection.charSet: UTF-8
+  data:
+   jpa:
+    repositories:
+     enabled: true
+info:
+  component: Logger Service
+          
 error:
   path: /error
 
 
 # HTTP Server
 server:
-  port: 2000   # HTTP (Tomcat) port
+  port: 2300  
+  compression:
+    enabled: true  
+
 
   
 
@@ -24,12 +54,13 @@ server:
 #  1. DEV ONLY: Reduce the lease renewal interval to speed up registration
 #  2. Define URL of registration server (defaultZone)
 eureka:
+  instance:
+    hostname: localhost
+    port: 1111
+    leaseRenewalIntervalInSeconds: 5   # DO NOT DO THIS IN PRODUCTION
   client:
     serviceUrl:
-      defaultZone: http://localhost:1111/eureka/
-  instance:
-    leaseRenewalIntervalInSeconds: 5   # DO NOT DO THIS IN PRODUCTION
-    
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/    
   
 endpoints:
   restart:
@@ -39,12 +70,12 @@ endpoints:
   health:
     sensitive: false
 
+logging:
+  level:
+    ROOT: ERROR
+    org.springframework.web: ERROR
+  file: /log/${spring.application.name}.log
+
 ---
 spring:
   profiles: prod2001
-
-    
-    # HTTP Server
-server:
-  port: 2001   # HTTP (Tomcat) port
-

@@ -4,15 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 
-	<parent>
-		<groupId>org.springframework.cloud</groupId>
-		<artifactId>spring-cloud-starter-parent</artifactId>
-		<version>Brixton.RELEASE</version>
-	</parent>
-
-	<groupId>it.marcoberri.ms</groupId>
 	<artifactId>main</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>ms</name>
@@ -23,23 +15,6 @@
 		<junit.version>3.8.1</junit.version>
 	</properties>
 
-
-
-	<dependencies>
-
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-log4j2</artifactId>
-		</dependency>
-
-	</dependencies>
 
 
 	<build>
@@ -65,10 +40,21 @@
 	</build>
 
 	<modules>
-		<module>eureka</module>
-		<module>service-login</module>
-		<module>proxy-balancer</module>
+		<module>common</module>
+		<module>parent</module>
+		<module>service-eureka</module>
+		<module>service-proxy</module>
+		<module>service-authentication</module>
+		<module>service-logger</module>
+		<module>service-user</module>
+		<module>service-message</module>
 	</modules>
 
+
+	<parent>
+		<groupId>it.marcoberri.ms</groupId>
+		<artifactId>parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 
 </project>

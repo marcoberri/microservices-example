@@ -25,7 +25,7 @@ public class ServicesStart {
 		}
 
 		if (serverName.equals("registration") || serverName.equals("reg")) {
-			RegistrationServer.main(args);
+			ServiceEureka.main(args);
 		} else if (serverName.equals("accounts")) {
 			//AccountsServer.main(args);
 		} else if (serverName.equals("web")) {
