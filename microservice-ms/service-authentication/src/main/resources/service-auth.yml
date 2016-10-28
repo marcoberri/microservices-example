@@ -1,0 +1,79 @@
+info:
+  component: Authentication Service
+         
+# Spring properties
+spring:
+  application:
+     name: service-auth  # Service registers under this name
+  freemarker:
+    enabled: false           
+  datasource:
+    name: mainDB # Name of the datasource.  
+    password: toor 
+    username: root
+    url:  jdbc:mysql://localhost/ms?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false # JDBC url of the database.
+    driver-class-name: com.mysql.jdbc.Driver
+    testWhileIdle : true
+    validationQuery: SELECT 1
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto : update
+      dialect: org.hibernate.dialect.MySQL5Dialect
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+  data:
+   jpa:
+    repositories:
+     enabled: true
+              
+error:
+  path: /error
+
+logging:
+  level:
+    ROOT: ERROR
+    org.springframework.web: ERROR
+  file: /log/${spring.application.name}.log
+
+
+# HTTP Server
+server:
+  port: 2200   # HTTP (Tomcat) port
+  compression:
+    enabled: true  
+
+
+#  port: ${random.int(2000,2010)}   # HTTP (Tomcat) port
+
+# Discovery Server Access
+#  1. DEV ONLY: Reduce the lease renewal interval to speed up registration
+#  2. Define URL of registration server (defaultZone)
+eureka:
+  instance:
+    hostname: localhost
+    port: 1111
+    leaseRenewalIntervalInSeconds: 5   # DO NOT DO THIS IN PRODUCTION
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+          
+security:
+  user:  none
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+
+#---
+#spring:
+#  profiles: prod2001
+
+    
+#    # HTTP Server
+#server:
+#  port: 2001   # HTTP (Tomcat) port
+
