@@ -1,0 +1,26 @@
+2016-09-13 08:43:36.629  INFO 8215 --- [           main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@24e1091d: startup date [Tue Sep 13 08:43:36 CEST 2016]; root of context hierarchy
+2016-09-13 08:43:50.987  INFO 8215 --- [           main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-09-13 08:43:52.883  INFO 8215 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'configurationPropertiesRebinderAutoConfiguration' of type [class org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$760b9b8b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v1.3.5.RELEASE)
+
+2016-09-13 08:44:14.702  INFO 8215 --- [           main] i.m.ms.service.login.LoginServer         : No active profile set, falling back to default profiles: default
+2016-09-13 08:44:15.464  INFO 8215 --- [           main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@19a3fe77: startup date [Tue Sep 13 08:44:15 CEST 2016]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@24e1091d
+2016-09-13 08:45:03.053  WARN 8215 --- [           main] o.s.c.a.ConfigurationClassPostProcessor  : Cannot enhance @Configuration bean definition 'refreshScope' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2016-09-13 08:45:09.900  INFO 8215 --- [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=f3a0ed84-3b54-3a9d-b099-c7ff5f41feb1
+2016-09-13 08:45:10.222  INFO 8215 --- [           main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-09-13 08:45:11.694  INFO 8215 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [class org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$760b9b8b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-09-13 08:45:12.161  INFO 8215 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.RefreshEndpointAutoConfiguration' of type [class org.springframework.cloud.autoconfigure.RefreshEndpointAutoConfiguration$$EnhancerBySpringCGLIB$$1f6a9d81] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-09-13 08:45:27.502  INFO 8215 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 2010 (http)
+2016-09-13 08:45:28.389  INFO 8215 --- [           main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2016-09-13 08:45:28.390  INFO 8215 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.33
+2016-09-13 08:45:31.278  INFO 8215 --- [ost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2016-09-13 08:45:31.289  INFO 8215 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 75825 ms
+2016-09-13 08:45:52.004  INFO 8215 --- [ost-startStop-1] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: 'dispatcherServlet' to [/]
+2016-09-13 08:45:52
