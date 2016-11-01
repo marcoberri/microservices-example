@@ -72,8 +72,8 @@ endpoints:
 
 logging:
   level:
-    ROOT: DEBUG
-    org.springframework.web: DEBUG
+    ROOT: ERROR
+    org.springframework.web: ERROR
   file: /log/${spring.application.name}.log
 
 ---

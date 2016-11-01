@@ -1,20 +1,26 @@
 package it.marcoberri.ms.common.restcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.marcoberri.ms.common.model.InfoRestModel;
-import it.marcoberri.ms.commons.security.RemoteTokenServices;
 
-public class CommonRestController {
+public class CommonRestController/*<T, A>*/ {
 
 	@Autowired
 	Environment environment;
+
+//	@Autowired
+//	private T repository;
+//
+//	@RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+//	public A save(@RequestBody A profile) {
+//		return repository..save(profile);
+//	}
 
 	@RequestMapping(value = "/echo", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
 	public InfoRestModel info() {
@@ -29,6 +35,4 @@ public class CommonRestController {
 		return new InfoRestModel(System.getProperty("spring.config.name"), port);
 
 	}
-
-	
 }

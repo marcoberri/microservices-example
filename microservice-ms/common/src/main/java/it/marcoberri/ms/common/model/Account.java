@@ -48,6 +48,9 @@ public class Account extends BaseModel {
 	@ElementCollection(targetClass = Profile.class)
 	private Set<Profile> profiles;
 
+	@ElementCollection(targetClass = Customer.class)
+	private Set<Customer> customers;
+
 	public Long getId() {
 		return id;
 	}
@@ -113,12 +116,21 @@ public class Account extends BaseModel {
 	}
 
 	@OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-	public java.util.Set<Profile> getProfiles() {
+	public Set<Profile> getProfiles() {
 		return profiles;
 	}
 
 	public void setProfiles(java.util.Set<Profile> profiles) {
 		this.profiles = profiles;
+	}
+
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	public Set<Customer> getCustomers() {
+		return customers;
+	}
+
+	public void setCustomers(Set<Customer> customers) {
+		this.customers = customers;
 	}
 
 	public String getMobile() {

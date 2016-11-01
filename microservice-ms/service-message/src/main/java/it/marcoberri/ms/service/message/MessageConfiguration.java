@@ -32,6 +32,8 @@ public class MessageConfiguration extends WebMvcConfigurerAdapter {
 		logger.info("addInterceptors --> url: " + conf.getToken().getUrl());
 		logger.info("addInterceptors --> getPathPatterns: " + conf.getToken().getPathPatterns());
 		tokenInterceptor.setUrl(conf.getToken().getUrl());
+		tokenInterceptor.setEnable(conf.getToken().getEnable());
+		tokenInterceptor.setFieldName(conf.getToken().getTokenfiled());
 		registry.addInterceptor(tokenInterceptor).addPathPatterns(conf.getToken().getPathPatterns());
 		registry.addInterceptor(new RequestProcessingTimeInterceptor()).addPathPatterns(conf.getToken().getPathPatterns());
 		super.addInterceptors(registry);

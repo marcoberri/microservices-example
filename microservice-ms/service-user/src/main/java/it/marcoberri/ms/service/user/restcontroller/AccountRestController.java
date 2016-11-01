@@ -42,10 +42,14 @@ public class AccountRestController extends CommonRestController {
 		Account account = accountRepository.findByUsername(key);
 		if (account != null)
 			return account;
+		try {
+			Long id = new Long(key);
 
-		Long id = new Long(key);
-
-		return accountRepository.findById(id);
+			return accountRepository.findById(id);
+		} catch (final Exception e) {
+			logger.error(e.getMessage(),e);
+			return new Account("-", "-");
+		}
 	}
 
 }

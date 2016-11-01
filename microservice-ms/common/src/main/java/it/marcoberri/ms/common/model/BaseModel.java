@@ -14,10 +14,10 @@ public class BaseModel implements Serializable {
 	private Date lastModifyTs;
 	
 	private Long createdby;
-	private Date createTs;
+	private Date createTs = new Date();
 	
 	
-	private Date enabledFrom;
+	private Date enabledFrom = new Date();
 	private Date enabledTo;
 	public Long getLastModifyby() {
 		return lastModifyby;

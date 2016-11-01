@@ -17,6 +17,10 @@ public class TokenInterceptor implements HandlerInterceptor {
 
 	private static final Logger logger = Logger.getLogger(TokenInterceptor.class);
 
+	private boolean enable=false;
+	
+	private String fieldName;
+	
 	private String url;
 
 	public String getUrl() {
@@ -41,18 +45,22 @@ public class TokenInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
+		
+		if(!isEnable())
+			return true;
+		
 		try {
 			logger.info("****** preHandle *****");
-			logger.info("request token header:" + request.getHeader("token"));
-			logger.info("request token params:" + request.getParameter("token"));
-			String token = request.getHeader("token");
+			logger.info("request token header:" + request.getHeader(getFieldName()));
+			logger.info("request token params:" + request.getParameter(getFieldName()));
+			String token = request.getHeader(getFieldName());
 			if (token == null)
-				token = request.getParameter("token");
+				token = request.getParameter(getFieldName());
 			logger.info("token:" + token);
 
 			RestTemplate restTemplate = new RestTemplate();
 			LinkedMultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
-			map.add("token", token);
+			map.add(getFieldName(), token);
 
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -61,15 +69,33 @@ public class TokenInterceptor implements HandlerInterceptor {
 
 			ResponseEntity<String> res = restTemplate.postForEntity(getUrl(), req, String.class);
 
-			logger.info("result:" + res.getBody());
-
-			logger.info("****** preHandle *****");
-		} catch (Exception exception) {
+			logger.debug("****** preHandle *****");
+			return true;
+			
+		} catch (final Exception exception) {
 			response.sendError(HttpServletResponse.SC_FORBIDDEN);
-			response.flushBuffer();
+		
 			return false;
 		}
-		return true;
+		
+		
+		
+	}
+
+	public boolean isEnable() {
+		return enable;
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
+
+	public String getFieldName() {
+		return fieldName;
+	}
+
+	public void setFieldName(String fieldName) {
+		this.fieldName = fieldName;
 	}
 
 }

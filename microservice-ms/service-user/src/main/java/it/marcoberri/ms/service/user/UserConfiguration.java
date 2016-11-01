@@ -17,7 +17,7 @@ import it.marcoberri.ms.service.user.conf.AppConfiguration;
 @Configuration
 @ComponentScan
 @EntityScan({"it.marcoberri.ms.common.model","it.marcoberri.ms.service.user.model"})
-@EnableJpaRepositories({"it.marcoberri.ms.service.user.repository","it.marcoberri.ms.common.repository"})
+@EnableJpaRepositories({"it.marcoberri.ms.service.user.repository"})
 @EnableTransactionManagement
 public class UserConfiguration extends WebMvcConfigurerAdapter {
 	
@@ -28,10 +28,13 @@ public class UserConfiguration extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		TokenInterceptor tokenInterceptor = new TokenInterceptor();
 		logger.info("addInterceptors --> url: " + conf.getToken().getUrl());
 		logger.info("addInterceptors --> getPathPatterns: " + conf.getToken().getPathPatterns());
+
+		final TokenInterceptor tokenInterceptor = new TokenInterceptor();
 		tokenInterceptor.setUrl(conf.getToken().getUrl());
+		tokenInterceptor.setEnable(conf.getToken().getEnable());
+		tokenInterceptor.setFieldName(conf.getToken().getTokenfiled());
 		registry.addInterceptor(tokenInterceptor).addPathPatterns(conf.getToken().getPathPatterns());
 		registry.addInterceptor(new RequestProcessingTimeInterceptor()).addPathPatterns(conf.getToken().getPathPatterns());
 		super.addInterceptors(registry);
