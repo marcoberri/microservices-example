@@ -1,8 +1,9 @@
 #APP Security Token
 app:
+  serviceName: ${spring.application.name}
   token:
     url: http://localhost:8080/auth/oauth/check_token
-    enable: false
+    enable: true
     tokenfield: token
     PathPatterns: /**
      

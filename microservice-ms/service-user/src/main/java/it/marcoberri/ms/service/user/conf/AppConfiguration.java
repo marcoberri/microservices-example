@@ -9,6 +9,6 @@ import it.marcoberri.ms.common.configuration.MainApp;
 @Configuration
 @EnableConfigurationProperties
 @ConfigurationProperties("app")
-public class AppConfiguration extends MainApp{
+public class AppConfiguration extends MainApp {
 
 }

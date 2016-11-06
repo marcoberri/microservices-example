@@ -38,7 +38,7 @@ logging:
 
 # HTTP Server
 server:
-  port: 2200  
+  port: 2220  
   compression:
     enabled: true  
 

@@ -40,6 +40,7 @@ public class UserConfiguration extends WebMvcConfigurerAdapter {
 			tokenInterceptor.setUrl(conf.getToken().getUrl());
 			tokenInterceptor.setEnable(conf.getToken().getEnable());
 			tokenInterceptor.setFieldName(conf.getToken().getTokenfiled());
+			tokenInterceptor.setServiceName(conf.getServiceName());
 		}
 
 		registry.addInterceptor(tokenInterceptor).addPathPatterns(conf.getToken().getPathPatterns());

@@ -21,6 +21,8 @@ public class TokenInterceptor implements HandlerInterceptor {
 
 	private String fieldName;
 
+	private String serviceName;
+	
 	private String url;
 
 	private RestTemplate restTemplate = new RestTemplate();
@@ -62,11 +64,15 @@ public class TokenInterceptor implements HandlerInterceptor {
 
 			LinkedMultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
 			map.add(getFieldName(), token);
-
+			map.add("serviceName", serviceName);
+			map.add("now", ""+System.currentTimeMillis());
+			
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
 			HttpEntity<LinkedMultiValueMap<String, String>> req = new HttpEntity<LinkedMultiValueMap<String, String>>(map, headers);
+			
+			
 			ResponseEntity<String> res = restTemplate.postForEntity(getUrl(), req, String.class);
 
 			
@@ -98,6 +104,14 @@ public class TokenInterceptor implements HandlerInterceptor {
 
 	public void setFieldName(String fieldName) {
 		this.fieldName = fieldName;
+	}
+
+	public String getServiceName() {
+		return serviceName;
+	}
+
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
 	}
 
 }

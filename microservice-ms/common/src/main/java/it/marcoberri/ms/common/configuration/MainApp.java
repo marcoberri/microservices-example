@@ -11,6 +11,8 @@ public class MainApp {
 
 	
 	private AppTokenConfig token;
+	
+	private String serviceName;
 
 	private AppLoggerConfig logger;
 	
@@ -28,6 +30,14 @@ public class MainApp {
 
 	public void setLogger(AppLoggerConfig logger) {
 		this.logger = logger;
+	}
+
+	public String getServiceName() {
+		return serviceName;
+	}
+
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
 	}
 
 
