@@ -21,13 +21,13 @@ public class ActionRestController extends CommonRestController {
 	private ActionRepository actionRepository;
 
 	@RequestMapping(value = "/{application}/{userid}/{action}/{object}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-	public void save(@PathVariable("object") String object, @PathVariable("application") String application, @PathVariable("userid") Long userid, @PathVariable("action") String action, @RequestParam String message) {
+	public  Action save(@PathVariable("object") String object, @PathVariable("application") String application, @PathVariable("userid") Long userid, @PathVariable("action") String action, @RequestParam String message) {
 		final Action act = new Action();
 		act.setApplication(application);
 		act.setAction(action);
 		act.setUser(userid);
 		act.setObject(object);
 		act.setMessage(message);
-		actionRepository.save(act);
+		return actionRepository.save(act);
 	}
 }

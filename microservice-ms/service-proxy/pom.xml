@@ -61,6 +61,23 @@
 			<groupId>org.springframework.security.oauth</groupId>
 			<artifactId>spring-security-oauth2</artifactId>
 		</dependency>
-		
+
 	</dependencies>
+	<url>http://tecnicume.blogspot.com</url>
+	<name>service-proxy</name>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>it.marcoberri.ms.proxy.ServiceProxy</mainClass>
+					<layout>JAR</layout>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
 </project>

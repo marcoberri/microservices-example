@@ -16,27 +16,38 @@ import it.marcoberri.ms.service.user.conf.AppConfiguration;
 
 @Configuration
 @ComponentScan
-@EntityScan({"it.marcoberri.ms.common.model","it.marcoberri.ms.service.user.model"})
-@EnableJpaRepositories({"it.marcoberri.ms.service.user.repository"})
+@EntityScan({ "it.marcoberri.ms.common.model", "it.marcoberri.ms.service.user.model" })
+@EnableJpaRepositories({ "it.marcoberri.ms.service.user.repository" })
 @EnableTransactionManagement
 public class UserConfiguration extends WebMvcConfigurerAdapter {
-	
+
 	private static final Logger logger = Logger.getLogger(UserConfiguration.class);
-	
+
 	@Autowired
 	AppConfiguration conf;
-	
+
+	private TokenInterceptor tokenInterceptor;
+
+	private RequestProcessingTimeInterceptor requestProcessingInterceptor;
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		logger.info("addInterceptors --> url: " + conf.getToken().getUrl());
 		logger.info("addInterceptors --> getPathPatterns: " + conf.getToken().getPathPatterns());
 
-		final TokenInterceptor tokenInterceptor = new TokenInterceptor();
-		tokenInterceptor.setUrl(conf.getToken().getUrl());
-		tokenInterceptor.setEnable(conf.getToken().getEnable());
-		tokenInterceptor.setFieldName(conf.getToken().getTokenfiled());
+		if (tokenInterceptor == null) {
+			tokenInterceptor = new TokenInterceptor();
+			tokenInterceptor.setUrl(conf.getToken().getUrl());
+			tokenInterceptor.setEnable(conf.getToken().getEnable());
+			tokenInterceptor.setFieldName(conf.getToken().getTokenfiled());
+		}
+
 		registry.addInterceptor(tokenInterceptor).addPathPatterns(conf.getToken().getPathPatterns());
-		registry.addInterceptor(new RequestProcessingTimeInterceptor()).addPathPatterns(conf.getToken().getPathPatterns());
+
+		if (requestProcessingInterceptor == null)
+			requestProcessingInterceptor = new RequestProcessingTimeInterceptor();
+
+		registry.addInterceptor(requestProcessingInterceptor).addPathPatterns(conf.getToken().getPathPatterns());
 		super.addInterceptors(registry);
 	}
 }

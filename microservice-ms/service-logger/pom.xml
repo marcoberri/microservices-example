@@ -10,7 +10,7 @@
 	</parent>
 	<artifactId>service-logger</artifactId>
 	<name>service-logging</name>
-	<url>http://maven.apache.org</url>
+	<url>http://tecnicume.blogspot.com</url>
 	<dependencies>
 
 

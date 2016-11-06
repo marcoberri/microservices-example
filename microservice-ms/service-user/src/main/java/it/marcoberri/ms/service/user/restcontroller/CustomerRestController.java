@@ -46,11 +46,12 @@ public class CustomerRestController extends CommonRestController {
 		if (customer != null)
 			return customer;
 		try {
+			
 			Long id = new Long(key);
 
 			return customerRepository.findById(id);
 		} catch (final Exception e) {
-			logger.error(e.getMessage(), e);
+			logger.warn(e.getMessage(), e);
 			return new Customer();
 		}
 	}

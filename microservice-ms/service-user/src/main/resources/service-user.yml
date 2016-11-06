@@ -2,7 +2,7 @@
 app:
   token:
     url: http://localhost:8080/auth/oauth/check_token
-    enable: true
+    enable: false
     tokenfield: token
     PathPatterns: /**
      
@@ -41,7 +41,7 @@ error:
 
 # HTTP Server
 server:
-  port: 2100   # HTTP (Tomcat) port
+  port: 2100  
   compression:
     enabled: true  
 
@@ -49,18 +49,20 @@ server:
   
 
 #  port: ${random.int(2000,2010)}   # HTTP (Tomcat) port
-
-# Discovery Server Access
-#  1. DEV ONLY: Reduce the lease renewal interval to speed up registration
-#  2. Define URL of registration server (defaultZone)
 eureka:
   instance:
     hostname: localhost
     port: 1111
-    leaseRenewalIntervalInSeconds: 5   # DO NOT DO THIS IN PRODUCTION
+    metadataMap:
+      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 5
+    lease-expiration-duration-in-seconds: 5
   client:
+    fetchRegistry: true
+    registryFetchIntervalSeconds: 5
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/    
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
   
 endpoints:
   restart:

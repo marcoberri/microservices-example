@@ -3,22 +3,38 @@ spring:
     name: eureka
   profiles: default
   thymeleaf:
-    enabled: false     # Disable Thymeleaf 
+    enabled: false  
      
 server:
-  port: 1111   # HTTP (Tomcat) port
+  port: 1111 
     
 
-# Configure this Discovery Server
+
 eureka:
   instance:
+    #preferIpAddress: true
     hostname: localhost
+  server:
+    enableSelfPreservation: true
+    appname: MS-DEV_TEST
+    eviction-interval-timer-in-ms: 1000   
   client:  # Not a client, don't register with yourself
     registerWithEureka: false
     fetchRegistry: false
+   # serviceUrl:
+   #   defaultZone: http://localhost:1111/eureka/   
+
+
+# Configure this Discovery Server
+#eureka:
+#  instance:
+#    hostname: localhost
+#  client:  # Not a client, don't register with yourself
+#    registerWithEureka: false
+#    fetchRegistry: false
 
 #logging:
-#  level:
+#  level
 #    ROOT: DEBUG
 #    org.springframework.web: DEBUG
 #  file: /log/${spring.application.name}.log

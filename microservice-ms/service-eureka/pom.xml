@@ -33,10 +33,11 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>it.marcoberri.ms.eureka.RegistrationServer</mainClass>
+					<mainClass>it.marcoberri.ms.eureka.ServiceEureka</mainClass>
 					<layout>JAR</layout>
 				</configuration>
 			</plugin>
+
 
 
 		</plugins>
@@ -100,4 +101,5 @@
 		</dependency>
 
 	</dependencies>
+	<url>http://tecnicume.blogspot.com</url>
 </project>

@@ -4,7 +4,18 @@ spring:
       
 info:
   component: Zuul Server
-             
+
+ribbon: 
+  ConnectTimeout: 30000
+  ReadTimeout: 60000
+  
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000        
 zuul:
   routes:
     user:
@@ -25,22 +36,33 @@ zuul:
   health:
     enabled: true
   add-proxy-headers: true
-  
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 10000  
+    max-total-connections: 10000
+    max-per-route-connections: 10000
 security:
     basic:
       enabled: false
       enable-csrf: false
       session: stateless 
         
+#  port: ${random.int(2000,2010)}   # HTTP (Tomcat) port
 eureka:
   instance:
     hostname: localhost
     port: 1111
-    leaseRenewalIntervalInSeconds: 5   # DO NOT DO THIS IN PRODUCTION
+    metadataMap:
+      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 5 #Not in prod
+    lease-expiration-duration-in-seconds: 5
   client:
+    fetchRegistry: true
+    registryFetchIntervalSeconds: 5
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
-
+  
 server:
   port: 8080
 

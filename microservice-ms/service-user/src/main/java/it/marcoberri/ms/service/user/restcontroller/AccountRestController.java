@@ -1,8 +1,11 @@
 package it.marcoberri.ms.service.user.restcontroller;
 
+import java.util.Date;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,14 +25,18 @@ public class AccountRestController extends CommonRestController {
 
 	private static final Logger logger = Logger.getLogger(AccountRestController.class);
 
-	@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-	public void save(@RequestBody Account accountToSave) {
+	
+	@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+	public Account save(@RequestBody Account accountToSave) {
+		if (accountToSave.getUsername() != null) {
+			Account check = accountRepository.findByUsername(accountToSave.getUsername());
+			if (check != null && check.getId() != null) {
+				accountToSave.setId(check.getId());
+				accountToSave.setLastModifyTs(new Date());
 
-		// verifico che lo username non esista.
-		// se esiste tono un erorre
-		// altrimenti salvo
-
-		accountRepository.save(accountToSave);
+			}
+		}
+		return accountRepository.save(accountToSave);
 	}
 
 	@RequestMapping(value = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
@@ -47,7 +54,7 @@ public class AccountRestController extends CommonRestController {
 
 			return accountRepository.findById(id);
 		} catch (final Exception e) {
-			logger.error(e.getMessage(),e);
+			logger.error(e.getMessage(), e);
 			return new Account("-", "-");
 		}
 	}
