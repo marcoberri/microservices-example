@@ -1,6 +1,14 @@
 info:
   component: Authentication Service
-         
+
+# HTTP Server
+#${random.int(2000,2010)}
+server:
+  port: 2260
+  connection-timeout: 1000000
+  compression:
+    enabled: true 
+    
 # Spring properties
 spring:
   application:
@@ -36,21 +44,15 @@ logging:
   file: /log/${spring.application.name}.log
 
 
-# HTTP Server
-server:
-  port: 2220  
-  compression:
-    enabled: true  
 
-
-#  port: ${random.int(2000,2010)}   # HTTP (Tomcat) port
 
 eureka:
+  instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
   instance:
     hostname: localhost
     port: 1111
-    metadataMap:
-      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  metadataMap:
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
     preferIpAddress: true
     leaseRenewalIntervalInSeconds: 5
     lease-expiration-duration-in-seconds: 5
@@ -59,7 +61,7 @@ eureka:
     registryFetchIntervalSeconds: 5
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
-      
+        
 #eureka:
 #  instance:
 #    hostname: localhost

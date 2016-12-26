@@ -6,7 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 @Entity
+@Audited
 @Table(name = "customer_lookup")
 public class Customer extends BaseModel {
 
@@ -20,9 +23,10 @@ public class Customer extends BaseModel {
 	@Column(name = "customer_id", unique = true, nullable = false)
 	private Long id;
 
-	@Column(unique = true, nullable = false)
+	@Column(unique = true, nullable = false, length = 30)
 	private String name;
 
+	@Column(length = 1000)
 	private String description;
 
 	public Long getId() {

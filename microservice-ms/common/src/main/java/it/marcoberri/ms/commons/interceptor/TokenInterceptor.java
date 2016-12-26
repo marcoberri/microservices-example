@@ -8,10 +8,14 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+
+import it.marcoberri.ms.commons.exception.UserTokenNotFoundException;
 
 public class TokenInterceptor implements HandlerInterceptor {
 
@@ -22,13 +26,20 @@ public class TokenInterceptor implements HandlerInterceptor {
 	private String fieldName;
 
 	private String serviceName;
-	
+
 	private String url;
 
-	private RestTemplate restTemplate = new RestTemplate();
+	private RestTemplate restTemplate = new RestTemplate(clientHttpRequestFactory());
 
 	public String getUrl() {
 		return url;
+	}
+
+	private ClientHttpRequestFactory clientHttpRequestFactory() {
+		HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+		factory.setReadTimeout(6000);
+		factory.setConnectTimeout(6000);
+		return factory;
 	}
 
 	public void setUrl(String url) {
@@ -50,44 +61,41 @@ public class TokenInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-		logger.error(" ****** preHandle ***** " + request.getRequestURI());
+		logger.info(" ****** preHandle ***** " + request.getRequestURI() + "[" + request.getMethod() + "]");
 
 		if (!isEnable())
 			return true;
 
-		try {
+		String token = request.getHeader(getFieldName());
+		if (token == null)
+			token = request.getParameter(getFieldName());
+		logger.error(" token:" + token);
 
-			String token = request.getHeader(getFieldName());
-			if (token == null)
-				token = request.getParameter(getFieldName());
-			logger.error(" token:" + token);
+		try {
 
 			LinkedMultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
 			map.add(getFieldName(), token);
 			map.add("serviceName", serviceName);
-			map.add("now", ""+System.currentTimeMillis());
-			
+			map.add("now", "" + System.currentTimeMillis());
+
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
 			HttpEntity<LinkedMultiValueMap<String, String>> req = new HttpEntity<LinkedMultiValueMap<String, String>>(map, headers);
-			
-			
+
 			ResponseEntity<String> res = restTemplate.postForEntity(getUrl(), req, String.class);
 
-			
-			logger.error("****** preHandle *****:" + res);
-			
+			logger.info("****** preHandle *****:" + res);
+
 			return true;
 
 		} catch (final Exception exception) {
-			
-			logger.error("****** preHandle *****:" + exception.getMessage(), exception);
-			response.sendError(HttpServletResponse.SC_FORBIDDEN,exception.getMessage());
-			return false;
-		} finally {
-		}
 
+			logger.info("****** preHandle *****:" + exception.getMessage(), exception);
+			response.sendError(HttpServletResponse.SC_FORBIDDEN, exception.getMessage());
+			throw new UserTokenNotFoundException(token);
+
+		}
 	}
 
 	public boolean isEnable() {

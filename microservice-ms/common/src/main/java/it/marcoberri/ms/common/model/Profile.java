@@ -8,7 +8,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 @Entity
+@Audited
 @Table(name = "profile_lookup")
 public class Profile extends BaseModel {
 
@@ -25,6 +28,7 @@ public class Profile extends BaseModel {
 	@Column(unique = true, nullable = false)
 	private String name;
 
+	@Column(length = 1000)
 	private String description;
 
 	@ManyToOne

@@ -41,7 +41,7 @@ error:
 
 # HTTP Server
 server:
-  port: 2300  
+  port: ${random.int(2020,2030)}  
   compression:
     enabled: true  
 

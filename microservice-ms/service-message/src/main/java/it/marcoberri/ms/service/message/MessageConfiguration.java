@@ -16,7 +16,7 @@ import it.marcoberri.ms.service.message.conf.AppConfiguration;
 
 @Configuration
 @ComponentScan
-@EntityScan("it.marcoberri.ms.service.message.model")
+@EntityScan({"it.marcoberri.ms.common.model","it.marcoberri.ms.service.message.model"})
 @EnableJpaRepositories("it.marcoberri.ms.service.message.repository")
 @EnableTransactionManagement
 public class MessageConfiguration extends WebMvcConfigurerAdapter {

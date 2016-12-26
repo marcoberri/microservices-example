@@ -5,6 +5,13 @@ spring:
 info:
   component: Zuul Server
 
+server:
+  port: 8080
+  connection-timeout: 1000000
+  compression:
+    enabled: true  
+
+
 ribbon: 
   ConnectTimeout: 30000
   ReadTimeout: 60000
@@ -28,6 +35,12 @@ zuul:
       path: /log/**
       serviceId: service-logger
       stripPrefix: true
+    msg:
+      sensitiveHeaders:
+      path: /msg/**
+      serviceId: service-message
+      stripPrefix: true
+
     auth:
       sensitiveHeaders:
       path: /auth/**
@@ -47,7 +60,6 @@ security:
       enable-csrf: false
       session: stateless 
         
-#  port: ${random.int(2000,2010)}   # HTTP (Tomcat) port
 eureka:
   instance:
     hostname: localhost
@@ -63,8 +75,6 @@ eureka:
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
   
-server:
-  port: 8080
 
 logging:
   level:

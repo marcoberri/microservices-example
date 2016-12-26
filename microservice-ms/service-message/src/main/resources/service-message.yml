@@ -1,3 +1,14 @@
+# HTTP Server
+server:
+  port: 2300
+  connection-timeout: 1000000
+  compression:
+    enabled: true  
+
+info:
+  component: Message Service
+
+
 #APP Security Token
 app:
   token:
@@ -13,8 +24,8 @@ spring:
   freemarker:
     enabled: false           
   datasource:
-    name: mainDB   
-    password: toor
+    name: mainDB # Name of the datasource.  
+    password: toor 
     username: root
     url:  jdbc:mysql://localhost/ms?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false # JDBC url of the database.
     driver-class-name: com.mysql.jdbc.Driver
@@ -26,27 +37,14 @@ spring:
       ddl-auto : update
       dialect: org.hibernate.dialect.MySQL5Dialect
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
-    properties:  
-      hibernate.connection.charSet: UTF-8
   data:
    jpa:
     repositories:
      enabled: true
-info:
-  component: Message Service
           
 error:
   path: /error
 
-
-# HTTP Server
-server:
-  port: 2400   # HTTP (Tomcat) port
-  compression:
-    enabled: true  
-
-
-  
 
 eureka:
   instance:
@@ -76,13 +74,4 @@ logging:
     ROOT: ERROR
     org.springframework.web: ERROR
   file: /log/${spring.application.name}.log
-
----
-spring:
-  profiles: prod2001
-
-    
-    # HTTP Server
-server:
-  port: 2001   # HTTP (Tomcat) port
 

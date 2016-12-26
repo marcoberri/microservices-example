@@ -1,3 +1,15 @@
+info:
+  component: User Service
+
+# HTTP Server
+#${random.int(2060,2070)}
+server:
+  port: 2030
+  connection-timeout: 1000000
+  compression:
+    enabled: true  
+
+
 #APP Security Token
 app:
   serviceName: ${spring.application.name}
@@ -6,9 +18,12 @@ app:
     enable: true
     tokenfield: token
     PathPatterns: /**
+  
      
 # Spring properties
 spring:
+ # autoconfigure:
+  #  exclude: org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration
   application:
      name: service-user  
   freemarker:
@@ -33,29 +48,24 @@ spring:
    jpa:
     repositories:
      enabled: true
-info:
-  component: User Service
+
           
-error:
-  path: /error
+#error:
+#  path: /error
 
 
-# HTTP Server
-server:
-  port: 2100  
-  compression:
-    enabled: true  
 
 
   
 
 #  port: ${random.int(2000,2010)}   # HTTP (Tomcat) port
 eureka:
+  instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
   instance:
     hostname: localhost
     port: 1111
-    metadataMap:
-      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  metadataMap:
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
     preferIpAddress: true
     leaseRenewalIntervalInSeconds: 5
     lease-expiration-duration-in-seconds: 5

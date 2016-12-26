@@ -1,24 +1,22 @@
-package it.marcoberri.ms.service.message.model;
+package it.marcoberri.ms.common.model;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import it.marcoberri.ms.common.model.Account;
-import it.marcoberri.ms.common.model.BaseModel;
+import org.hibernate.envers.Audited;
 
 @Entity
+@Audited
 @Table(name = "message")
 public class Message extends BaseModel {
+
+	public Message() {
+
+	}
 
 	/**
 	 * 
@@ -30,13 +28,24 @@ public class Message extends BaseModel {
 	@Column(name = "message_id", unique = true, nullable = false)
 	private Long id;
 
-	private Account from;
+	@OneToOne
+	private Account accoutFrom;
 
-	private Account to;
-	
+	@OneToOne
+	private AccountTarget accountTo;
+
+	@Column(length = 5000)
 	private String msg;
-	
+
 	private Boolean readingFromUser = false;
+
+	public AccountTarget getAccountTo() {
+		return accountTo;
+	}
+
+	public void setAccountTo(AccountTarget accountTo) {
+		this.accountTo = accountTo;
+	}
 
 	public Long getId() {
 		return id;
@@ -44,22 +53,6 @@ public class Message extends BaseModel {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Account getFrom() {
-		return from;
-	}
-
-	public void setFrom(Account from) {
-		this.from = from;
-	}
-
-	public Account getTo() {
-		return to;
-	}
-
-	public void setTo(Account to) {
-		this.to = to;
 	}
 
 	public String getMsg() {
@@ -77,7 +70,21 @@ public class Message extends BaseModel {
 	public void setReadingFromUser(Boolean readingFromUser) {
 		this.readingFromUser = readingFromUser;
 	}
-	
-	
+
+	public Account getAccoutFrom() {
+		return accoutFrom;
+	}
+
+	public void setAccoutFrom(Account accoutFrom) {
+		this.accoutFrom = accoutFrom;
+	}
+
+//	public Account getAccountTo() {
+//		return accountTo;
+//	}
+//
+//	public void setAccountTo(Account accountTo) {
+//		this.accountTo = accountTo;
+//	}
 
 }

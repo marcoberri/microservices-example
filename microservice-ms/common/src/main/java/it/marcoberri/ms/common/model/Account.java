@@ -11,9 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Audited
 @Table(name = "account")
 public class Account extends BaseModel {
 
@@ -35,18 +38,29 @@ public class Account extends BaseModel {
 	@Column(unique = true, nullable = false)
 	public String username;
 
+	@Column(length = 100)
 	public String name;
 
+	@Column(length = 100)
 	public String surname;
 
+	@Column(length = 30)
 	public String phone;
 
+	@Column(length = 30)
 	public String mobile;
 
+	@Column(length = 40)
 	public String email;
 
 	@ElementCollection(targetClass = Profile.class)
 	private Set<Profile> profiles;
+
+	//@ElementCollection(targetClass = Message.class)
+	//private Set<Message> messagesFrom;
+
+	//@ElementCollection(targetClass = Message.class)
+	//private Set<Message> messagesTo;
 
 	@ElementCollection(targetClass = Customer.class)
 	private Set<Customer> customers;
@@ -114,6 +128,7 @@ public class Account extends BaseModel {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 
 	@OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
 	public Set<Profile> getProfiles() {

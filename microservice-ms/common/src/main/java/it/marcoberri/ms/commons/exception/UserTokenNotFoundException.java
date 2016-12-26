@@ -1,0 +1,18 @@
+package it.marcoberri.ms.commons.exception;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class UserTokenNotFoundException extends Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public UserTokenNotFoundException(String token) {
+		super("token not found " + token);
+	}
+
+}
