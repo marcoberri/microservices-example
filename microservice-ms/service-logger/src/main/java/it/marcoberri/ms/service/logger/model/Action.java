@@ -1,17 +1,10 @@
 package it.marcoberri.ms.service.logger.model;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import it.marcoberri.ms.common.model.BaseModel;
 
@@ -29,42 +22,53 @@ public class Action extends BaseModel {
 	private String action;
 	private String object;
 	private String message;
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getApplication() {
 		return application;
 	}
+
 	public void setApplication(String application) {
 		this.application = application;
 	}
+
 	public Long getUser() {
 		return user;
 	}
+
 	public void setUser(Long user) {
 		this.user = user;
 	}
+
 	public String getAction() {
 		return action;
 	}
+
 	public void setAction(String action) {
 		this.action = action;
 	}
+
 	public String getObject() {
 		return object;
 	}
+
 	public void setObject(String object) {
 		this.object = object;
 	}
+
 	public String getMessage() {
 		return message;
 	}
+
 	public void setMessage(String message) {
 		this.message = message;
 	}
 
-	
 }

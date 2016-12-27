@@ -1,18 +1,11 @@
 package it.marcoberri.ms.service.user.restcontroller;
 
-import java.util.Date;
-import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.marcoberri.ms.common.model.Account;
@@ -30,26 +23,26 @@ public class AccountRestController extends CommonRestController<AccountRestContr
 	/**
 	 * @param e
 	 * @return
-
-
-	@RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-	public List<Account> findAll() {
-		return repository.findAll();
-	}
-
-	@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-	public Account save(@RequestBody Account accountToSave) {
-		if (accountToSave.getUsername() != null) {
-			Account check = repository.findByUsername(accountToSave.getUsername());
-			if (check != null && check.getId() != null) {
-				accountToSave.setId(check.getId());
-				accountToSave.setLastModifyTs(new Date());
-			}
-		}
-		return repository.save(accountToSave);
-	}
-
-	/**
+	 * 
+	 * 
+	 * @RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE,
+	 *                       consumes = MediaType.APPLICATION_JSON_VALUE, method
+	 *                       = RequestMethod.GET) public List<Account> findAll()
+	 *                       { return repository.findAll(); }
+	 * 
+	 * @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes =
+	 *                          MediaType.APPLICATION_JSON_VALUE, method =
+	 *                          RequestMethod.POST) public Account
+	 *                          save(@RequestBody Account accountToSave) { if
+	 *                          (accountToSave.getUsername() != null) { Account
+	 *                          check =
+	 *                          repository.findByUsername(accountToSave.getUsername());
+	 *                          if (check != null && check.getId() != null) {
+	 *                          accountToSave.setId(check.getId());
+	 *                          accountToSave.setLastModifyTs(new Date()); } }
+	 *                          return repository.save(accountToSave); }
+	 * 
+	 *                          /**
 	 * @param usernameOrId
 	 * @return
 	 * @throws AccountNotFoundExcepion

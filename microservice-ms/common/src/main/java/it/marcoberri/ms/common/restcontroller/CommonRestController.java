@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import it.marcoberri.ms.common.model.Account;
 import it.marcoberri.ms.common.model.InfoRestModel;
-import it.marcoberri.ms.common.model.Profile;
 import it.marcoberri.ms.commons.exception.RestNotFoundExcepion;
 
 public class CommonRestController<C, R extends CrudRepository<M, Long>, M> {
@@ -29,7 +27,7 @@ public class CommonRestController<C, R extends CrudRepository<M, Long>, M> {
 	public String handleException(RestNotFoundExcepion e) {
 		return e.getMessage();
 	}
-	
+
 	@RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
 	public M save(@RequestBody M model) {
 		return repository.save(model);
